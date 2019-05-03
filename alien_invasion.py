@@ -32,7 +32,7 @@ def run_game():
         # Remove os projéteis que desapareceram
         for bullet in bullets.copy():
             if bullet.rect.bottom <= 0:
-                bullets.remove(bullets)
+                bullets.remove(bullet)
 
         gf.update_screen(ai_settings, screen, ship, bullets)
 
