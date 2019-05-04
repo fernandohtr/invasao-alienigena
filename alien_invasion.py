@@ -2,8 +2,10 @@ import pygame
 
 from pygame.sprite import Group
 
+from alien import Alien
 from settings import Settings
 from ship import Ship
+
 import game_functions as gf
 
 
@@ -23,18 +25,15 @@ def run_game():
     # Cria um grupo no qual serão armazenados os projéteis
     bullets = Group()
 
+    # Cria um alienígena
+    alien = Alien(ai_settings, screen)
+
     # Inicia o laço principal do jogo
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
-
-        # Remove os projéteis que desapareceram
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-
-        gf.update_screen(ai_settings, screen, ship, bullets)
+        gf.update_bullets(bullets)
+        gf.update_screen(ai_settings, screen, ship, alien, bullets)
 
 
 run_game()
