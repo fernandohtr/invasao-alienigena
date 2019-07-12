@@ -31,6 +31,7 @@ def check_events(
         ai_settings,
         screen,
         stats,
+        sb,
         play_button,
         ship,
         aliens,
@@ -50,6 +51,7 @@ def check_events(
                 ai_settings,
                 screen,
                 stats,
+                sb,
                 play_button,
                 ship,
                 aliens,
@@ -63,6 +65,7 @@ def check_play_button(
         ai_settings,
         screen,
         stats,
+        sb,
         play_button,
         ship,
         aliens,
@@ -82,6 +85,11 @@ def check_play_button(
         # Reinicia os dados estatísticos do jogo
         stats.reset_stats()
         stats.game_active = True
+
+        # Reinicia as imagens do painel de pontuação
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
 
         # Esvazia a lista de alienígenas e de projéteis
         aliens.empty()
@@ -165,9 +173,14 @@ def check_bullet_alien_collisions(
         check_high_score(stats, sb)
 
     if len(aliens) == 0:
-        # Destrói os projéteis existentes e cria uma nova frota
+        # Se a frota toda for destruída, inicia um novo nível
         bullets.empty()
         ai_settings.increase_speed()
+
+        # Aumenta o nível
+        stats.level += 1
+        sb.prep_level()
+
         create_fleet(ai_settings, screen, ship, aliens)
 
 

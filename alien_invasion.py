@@ -42,6 +42,7 @@ def run_game():
             ai_settings,
             screen,
             stats,
+            sb,
             play_button,
             ship,
             aliens,
