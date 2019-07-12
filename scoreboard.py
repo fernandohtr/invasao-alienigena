@@ -20,7 +20,8 @@ class Scoreboard:
 
     def prep_score(self):
         """Transforma a pontuação em uma imagem renderizada."""
-        score_str = str(self.stats.score)
+        rounded_score = int(slef.stats.score, -1)
+        score_str = '{:,}'.format(rounded_score)
         self.score_image = self.font.render(
             score_str,
             True,
