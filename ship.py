@@ -1,7 +1,7 @@
 import pygame
 
 
-class Ship():
+class Ship:
 
     def __init__(self, ai_settings, screen):
         """Inicializa a espaçonave e define sua posição incial."""

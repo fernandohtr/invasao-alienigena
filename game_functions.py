@@ -34,7 +34,7 @@ def check_events(
         play_button,
         ship,
         aliens,
-        bullets
+        bullets,
     ):
     """Responde a eventos de pressionamento de teclas e de mouse."""
     for event in pygame.event.get():
@@ -55,7 +55,7 @@ def check_events(
                 aliens,
                 bullets,
                 mouse_x,
-                mouse_y
+                mouse_y,
             )
 
 
@@ -68,7 +68,7 @@ def check_play_button(
         aliens,
         bullets,
         mouse_x,
-        mouse_y
+        mouse_y,
     ):
     """Inicia um novo jogo quando o jogador clicar em Play."""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
@@ -96,19 +96,24 @@ def update_screen(
         ai_settings,
         screen,
         stats,
+        sb,
         ship,
         aliens,
         bullets,
-        play_button
+        play_button,
     ):
     """Atualiza as imagens na tela e alterna para a nova tela."""
     # Redesenha a tela a cada pasagem pelo laço
     screen.fill(ai_settings.bg_color)
+
     # Redesenha todos os projéteis atrás da espaçonave e dos alienígenas
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
     aliens.draw(screen)
+
+    # Desenha a informação sobre pontuação
+    sb.show_score()
 
     #Desenha o botão Play se o jogo estive inativo
     if not stats.game_active:
@@ -188,7 +193,7 @@ def create_fleet(ai_settings, screen, ship, aliens):
     number_rows = get_number_rows(
         ai_settings,
         ship.rect.height,
-        alien.rect.height
+        alien.rect.height,
     )
 
     # Cria a frota de alienígenas

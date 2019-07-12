@@ -6,6 +6,7 @@ import game_functions as gf
 
 from button import Button
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from settings import Settings
 from ship import Ship
 
@@ -25,6 +26,7 @@ def run_game():
 
     # Cria uma instância para armazenar dados estatísticos do jogo
     stats = GameStats(ai_settings)
+    sb = Scoreboard(ai_settings, screen, stats)
 
     # Cria uma espaçonave, um grupo de projéteis e um grupo de alienígenas
     ship = Ship(ai_settings, screen)
@@ -43,7 +45,7 @@ def run_game():
             play_button,
             ship,
             aliens,
-            bullets
+            bullets,
         )
 
         if stats.game_active:
@@ -55,10 +57,11 @@ def run_game():
             ai_settings,
             screen,
             stats,
+            sb,
             ship,
             aliens,
             bullets,
-            play_button
+            play_button,
         )
 
 
