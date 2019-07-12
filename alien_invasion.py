@@ -2,11 +2,10 @@ import pygame
 
 from pygame.sprite import Group
 
-from alien import Alien
+import game_functions as gf
+
 from settings import Settings
 from ship import Ship
-
-import game_functions as gf
 
 
 def run_game():
@@ -19,21 +18,20 @@ def run_game():
     ))
     pygame.display.set_caption('Alien Invasion')
 
-    # Cria uma espaçonave
+    # Cria uma espaçonave, um grupo de projéteis e um grupo de alienígenas
     ship = Ship(ai_settings, screen)
-
-    # Cria um grupo no qual serão armazenados os projéteis
     bullets = Group()
+    aliens = Group()
 
-    # Cria um alienígena
-    alien = Alien(ai_settings, screen)
+    # Cria a frota de alienígenas
+    gf.create_fleet(ai_settings, screen, aliens)
 
     # Inicia o laço principal do jogo
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
-        gf.update_screen(ai_settings, screen, ship, alien, bullets)
+        gf.update_screen(ai_settings, screen, ship, aliens, bullets)
 
 
 run_game()
