@@ -123,7 +123,7 @@ def update_screen(
     pygame.display.flip()
 
 
-def update_bullets(ai_settings, screen, ship, aliens, bullets):
+def update_bullets(ai_settings, screen, stats, sb, ship, aliens, bullets):
     """Atualiza a posição dos projéteis e se livra dos projéteis
     antigos."""
     # Atualiza as posições dos projéteis
@@ -134,13 +134,33 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collisions(
+        ai_settings,
+        screen,
+        stats,
+        sb,
+        ship,
+        aliens,
+        bullets
+    )
 
 
-def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collisions(
+        ai_settings,
+        screen,
+        stats,
+        sb,
+        ship,
+        aliens,
+        bullets
+    ):
     """Responde a colisões entre projéteis e alienígenas."""
     # Remove qualuqer projétil e alienígena que tenham colidido
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
+    if collisions:
+        stats.score += ai_settings.alien_points
+        sb.prep_score()
 
     if len(aliens) == 0:
         # Destrói os projéteis existentes e cria uma nova frota
