@@ -147,22 +147,26 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     """Responde ao fato de a espaçonave ter sido atingida por um alienígena."""
-    # Decrementa ships_left
-    stats.ships_left -= 1
+    if stats.ships_left > 0:
+        # Decrementa ships_left
+        stats.ships_left -= 1
 
-    # Esvazia a lista de alienígenas e de projéteis
-    aliens.empty()
-    bullets.empty()
+        # Esvazia a lista de alienígenas e de projéteis
+        aliens.empty()
+        bullets.empty()
 
-    # Cria uma nova frota e centraliza a espaçonave
-    create_fleet(ai_settings, screen, ship, aliens)
-    ship.center_ship()
+        # Cria uma nova frota e centraliza a espaçonave
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
 
-    # Faz uma pausa
-    sleep(0.5)
+        # Faz uma pausa
+        sleep(0.5)
+
+    else:
+        stats.game_active = False
 
 
-def check_aliens_bottom(Ai_settings, stats, screen, ship, aliens, bullets):
+def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """Verifica se algum alienígena alcançou a parte inferior da tela."""
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
