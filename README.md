@@ -35,7 +35,7 @@ pip install -r requirements/base.txt
 
 Com o ambiente preparado, execute o código principal:
 ```bash
-python main.py
+python game
 ```
 
 E pronto! O jogo funcionará.

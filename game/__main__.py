@@ -2,12 +2,12 @@ import pygame
 
 from pygame.sprite import Group
 
-from config import game_functions as gf
-from config.button import Button
-from config.game_stats import GameStats
-from config.scoreboard import Scoreboard
-from config.settings import Settings
-from config.ship import Ship
+from game import game_functions as gf
+from game.button import Button
+from game.game_stats import GameStats
+from game.scoreboard import Scoreboard
+from game.settings import Settings
+from game.ship import Ship
 
 
 def run_game():
